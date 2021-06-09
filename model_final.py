@@ -1,5 +1,5 @@
 '''
-like model1 except uses data from new pipeline
+trains model to predict AD onset from EHR data
 '''
 
 import numpy as np
@@ -248,7 +248,7 @@ find out who has memory issues
 '''
 def find_mem_prob(dementia=False):
     data_source = '0_align_250_t120.0003'
-    raw_data = np.load('/data2/Alzheimers/UMHS/68-72_new/' + data_source + '/X.npz')
+    raw_data = np.load('placeholder' + data_source + '/X.npz')
     data = sparse.COO(raw_data['coords'], raw_data['data'], tuple(raw_data['shape']))
     data = np.array(data.todense())
 
@@ -446,7 +446,7 @@ find feature meanings
 '''
 def weight_lookup(feat_i, feat_list=None):
     if feat_list is None:
-        feat_list = '/data2/Alzheimers/UMHS/68-72_new/0_align_250_t120.0003/s.feature_names.txt'
+        feat_list = 'placeholder/s.feature_names.txt'
     f1 = open(feat_list, 'r')
     c1 = f1.read()
     c1 = c1.split('\n')
@@ -455,7 +455,7 @@ def weight_lookup(feat_i, feat_list=None):
     f1.close()
     features1 = c1
 
-    feat_list2 = '/data2/Alzheimers/UMHS/68-72_new/0_align_250_t120.0003/X.feature_names.txt'
+    feat_list2 = 'placeholder/X.feature_names.txt'
     f2 = open(feat_list2, 'r')
     c2 = f2.read()
     c2 = c2.split('\n')
