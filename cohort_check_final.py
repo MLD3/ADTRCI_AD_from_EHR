@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 '''
 global variables
 '''
-file_root =  'C:\\Users\\dotjandr\\Documents\\AD-EHR\\tables\\'
+file_root =  'placeholder'
 
 
 '''
@@ -61,7 +61,7 @@ def get_madc_cohort():
 get mrns from the umhs cohort
 '''
 def get_umhs_cohort(data_type):
-    file = file_root + '\\cohorts\\cohort_new\\and_diagnosed\\cohort_' + data_type + '.csv'
+    file = file_root + 'placeholder' + data_type + '.csv'
     cohort = get_file(file, 3)
     return cohort
 
