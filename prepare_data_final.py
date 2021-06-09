@@ -50,11 +50,11 @@ def normalize(data):
 load time invariant data
 '''
 def load_time_invar(data_source):
-    raw_data = np.load('/data2/Alzheimers/UMHS/68-72_new/' + data_source + '/s.npz')
+    raw_data = np.load('placeholder' + data_source + '/s.npz')
     data = sparse.COO(raw_data['coords'], raw_data['data'], tuple(raw_data['shape']))
     data = data.todense()
 
-    pat_trajectories = get_file('/data2/Alzheimers/UMHS/68-72_new/amount_before.csv', 2)
+    pat_trajectories = get_file('placeholder', 2)
     pats = pat_trajectories[:, 0]
     pat_sort_i = np.argsort(pats)
 
@@ -82,11 +82,11 @@ data_types can be summary of sequential
     sequential: leaves data as is and returns a sequence of length 10
 '''
 def load_time_var(data_source, data_type):
-    raw_data = np.load('/data2/Alzheimers/UMHS/68-72_new/' + data_source + '/X.npz')
+    raw_data = np.load('placeholder' + data_source + '/X.npz')
     data = sparse.COO(raw_data['coords'], raw_data['data'], tuple(raw_data['shape']))
     data = np.array(data.todense())
 
-    pat_trajectories = get_file('/data2/Alzheimers/UMHS/68-72_new/amount_before.csv', 2)
+    pat_trajectories = get_file('placeholder', 2)
     traj_lens = pat_trajectories[:, 1].astype(int)
     traj_lens[np.where(traj_lens > T)[0]] = T
     traj_bins = (traj_lens // deltat).astype(int) 
@@ -112,7 +112,7 @@ def load_time_var(data_source, data_type):
 prepare sequences for input
 '''
 def prepare_sequences(data):
-    traj_lens = get_file('/data2/Alzheimers/UMHS/68-72_new/amount_before.csv', 2)
+    traj_lens = get_file('placeholder', 2)
     traj_lens = traj_lens[:, 1].astype(int)
     traj_bins = (traj_lens / deltat).astype(int) 
 
@@ -193,13 +193,13 @@ second columns is the time from alignment to conversion (if they convert, otherw
 third column is label
 '''
 def get_labels():
-    labels_file = '/data2/Alzheimers/UMHS/censorship/icdlabels.csv' 
+    labels_file = 'placeholder' 
     labels = get_file(labels_file, 4)
     labels_sort_i = np.argsort(labels[:, 0])
     labels = labels[labels_sort_i, :]
 
     #remove extra patients
-    pats = np.sort(get_file('/data2/Alzheimers/UMHS/68-72_new/pop.csv', 1)[1:].reshape(-1))
+    pats = np.sort(get_file('placeholder', 1)[1:].reshape(-1))
     excluded_patients = np.where(np.logical_not(np.isin(labels[:, 0], pats)))[0]
     labels = np.delete(labels, excluded_patients, axis=0)
     print(labels.shape)
